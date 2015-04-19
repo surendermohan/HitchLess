@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="TodoService">
+<head>
+    <title>HitchLess</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="public/js/services.js"></script>
+    <script src="public/js/controllers.js"></script>
+</head>
+
+<body>
+  <!-- Page: home  -->
+  <div id="home" data-role="page">
+    <div data-role="header" data-position="fixed">
+      <h3>SEA - SFO #1</h3>
+    </div>
+    <div role="main" class="ui-content">
+    <h1 is="gk-text">Flight Info&#xA0;</h1>
+    <h1 is="gk-text">Delay Times</h1>
+    <a href="#otherflight" class="ui-btn">I missed my flight</a>
+    </div>
+    <div data-position="fixed" data-role="footer" data-tap-toggle="false">
+      <div data-role="navbar" style="padding:0; margin:0 0 -1px;">
+        <ul id="footerBtn">
+          <li>
+            <a id="g1" data-theme="b" href="tripinfo.html">Trip</a>
+          </li>
+          <li>
+            <a id="g2" data-theme="b" href="checklist.html">Check List</a>
+          </li>
+          <li>
+            <a id="g3" data-theme="b" class="ui-btn-active ui-state-persist">Status</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Page: otherflight  -->
+  <div id="otherflight" data-role="page">
+    <div data-role="header" data-position="fixed">
+      <h3>Other Flights</h3>
+    </div>
+    <div role="main" class="ui-content">
+    <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow gk-decorate" id="gk-419AuD2" is="jqm-table">
+      <thead>
+        <tr>
+          <th data-priority="1">Date</th></th>
+          <th data-priority="1">Departure</th>
+          <th data-priority="1">Arrival</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>04/19</th>
+          <td>5:15 PM</td>
+          <td>7:30 PM</td>
+        </tr>
+        <tr>
+          <th>4/19</th>
+          <td>4:30 PM</td>
+          <td>7:05 PM</td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div>
+    <div data-position="fixed" data-role="footer" data-tap-toggle="false">
+      <div data-role="navbar" style="padding:0; margin:0 0 -1px;">
+        <ul id="footerBtn">
+          <li>
+            <a id="g1" data-theme="b" href="tripinfo.html">Trip</a>
+          </li>
+          <li>
+            <a id="g2" data-theme="b" href="checklist.html">Check List</a>
+          </li>
+          <li>
+            <a id="g3" data-theme="b" class="ui-btn-active ui-state-persist">Status</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

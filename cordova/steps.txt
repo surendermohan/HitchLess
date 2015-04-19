@@ -1,3 +1,5 @@
+cordova platform add ios android
+
 Install these plugins:
 
 cordova plugin add org.apache.cordova.geolocation
@@ -11,3 +13,13 @@ cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.
 //cordova plugin add https://github.com/apache/cordova-plugin-device
 //cordova plugin add https://github.com/christocracy/cordova-plugin-background-geolocation.git
 //cordova plugin add https://github.com/petermetz/cordova-plugin-ibeacon.git
+
+
+Build it
+--------
+cordova build ios
+cordova build android
+
+Run it
+------
+Run the xproj from XCode

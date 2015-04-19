@@ -27,6 +27,26 @@ app.get('/', function(req,res){
     res.sendfile('index.html');
 });
 
+app.get('/index.html', function(req,res){
+    res.sendfile('index.html');
+});
+
+app.get('/tripinfo.html', function(req,res){
+    res.sendfile('tripinfo.html');
+});
+
+app.get('/checklist.html', function(req,res){
+    res.sendfile('checklist.html');
+});
+
+app.get('/flightstatus.html', function(req,res){
+    res.sendfile('flightstatus.html');
+});
+
+app.get('/otherflights.html', function(req,res){
+    res.sendfile('otherflights.html');
+});
+
 /* list todo items */
 app.get('/api/todo', function (req, res) {
     return todoModel.find(function (err, todos) {
