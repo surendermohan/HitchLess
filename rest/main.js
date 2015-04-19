@@ -19,6 +19,7 @@ server.get('/echo/:name', function (req, res, next) {
 
 
 var tripModel = require('./models/trip')(mongoose, db);
+var userModel = require('./models/user')(mongoose, db);
 
 server.post('/trip', function (req, res, next) {
 
@@ -39,8 +40,15 @@ server.post('/trip', function (req, res, next) {
   return next();
 });
 
-server.get('/trip/:id', function (req, res, next) {
-  res.send(req.params);
+server.get('/trips', function (req, res, next) {
+	tripModel.find(function (err, result) {
+		if (err) {
+			console.log(err);
+			return next(err);
+		};
+
+		res.send(result);
+	}); 
   return next();
 });
 
