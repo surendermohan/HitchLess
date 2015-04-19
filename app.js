@@ -159,7 +159,8 @@ app.get('/flights', function (req, res, next) {
         'sortby2':'departuretime',
         'order2':'asc',
         'pointofsalecountry':'US',
-        'outbounddeparturewindow' : timeWindow
+        'outbounddeparturewindow' : timeWindow,
+        'limit' : 5
     };
 
     request({
