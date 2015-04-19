@@ -26,7 +26,7 @@ var userModel = require('./models/user')(mongoose, db);
 server.get('/user/:email', function (req, res, next) {
 	console.log(req.params);
 	userModel.findOne({
-		_id: req.params.email
+		email: req.params.email
 	}, 'name', function (err, user) {
 		if (err) {
 			console.log('ERROR:' + err);
@@ -41,22 +41,41 @@ server.post('/user', function (req, res, next) {
 
 	console.log('/user - ' + JSON.stringify(req.params));
 
-	var user = new userModel({
-		name: req.params.name,
-		email: req.params.email,
-		phone: req.params.phone
-	});
+	console.log('Searching user with email:' + req.params.email);
+	userModel.findOne({
+		email: req.params.email
+	}, function (err, result) {
 
-	user.save(function (err) {
 		if (err) {
-			console.log(err);
-			return;
+			console.log('Error:' + err);
+			return next(err);
 		};
-		console.log('New User:' + user.name + ' created.');
-	});
 
-  res.send(user);
-  return next();
+		if(result) {
+			console.log('User with email: ' + req.params.email + ' found.');
+			res.send(result);
+			return next(result);
+		}		
+
+		console.log('Creating user:' + req.params.email);
+		var user = new userModel({
+			name: req.params.name,
+			email: req.params.email,
+			phone: req.params.phone
+		});
+
+		user.save(function (err) {
+			if (err) {
+				console.log(err);
+				return;
+			};
+			console.log('New User:' + user.name + ' created.');
+		});
+
+		res.send(user);
+  	return next();
+
+	});
 });
 
 // TRIP
