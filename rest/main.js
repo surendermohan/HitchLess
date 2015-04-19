@@ -8,6 +8,9 @@ var server = restify.createServer({
   version: '1.0.0'
 });
 
+var sabreOAuthToken = 'Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/ACPCRTD!ICESMSLB\/CRT.LB!-0123456789012345678!123456!0!ABCDEFGHIJKLM!E2E-1';
+var originIP = '199.231.242.26';
+
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
@@ -148,6 +151,49 @@ server.get('/trips', function (req, res, next) {
 		res.send(result);
 	}); 
   return next();
+});
+
+// Options for missed flight given a date
+// using Sabre API
+server.get('/flights', function (req, res, next) {
+
+	var request = require('request');
+
+	// ?origin=JFK&destination=LAX&departuredate=2015-05-01&returndate=2015-05-05&onlineitinerariesonly=N&limit=10&offset=1&eticketsonly=N&sortby=totalfare&order=asc&sortby2=departuretime&order2=asc&pointofsalecountry=US
+	var propertiesObject = { 
+		'origin':'JFK',
+		'destination':'LAX',
+		'departuredate':'2015-05-01',
+		'returndate':'2015-05-05',
+		'onlineitinerariesonly':'N',
+		'limit':'10',
+		'offset':'1',
+		'eticketsonly':'N',
+		'sortby':'totalfare',
+		'order':'asc',
+		'sortby2':'departuretime',
+		'order2':'asc',
+		'pointofsalecountry':'US',
+	};
+
+	request({
+		method: 'GET',
+		url:'https://api.test.sabre.com/v1/shop/flights', 
+		headers: {
+	    'Authorization': 'Bearer ' + sabreOAuthToken,
+	    'X-Originating-Ip': originIP
+  	},
+		qs: propertiesObject
+	}, function(err, response, body) {
+  	if(err) { 
+  		console.log(err); return; 
+  	}
+  	console.log("Get response: " + response.statusCode);
+  	res.send({ok: 'Success!!',
+  		results: body
+  	});
+	});
+
 });
 
 server.listen(8080, function () {
