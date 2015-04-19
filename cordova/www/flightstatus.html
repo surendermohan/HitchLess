@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html ng-app="TodoService">
 <head>
-    <title>HitchLess</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.min.js"></script>
-    <script src="http://underscorejs.org/underscore-min.js"></script>
-    <script src="public/js/services.js"></script>
-    <script src="public/js/controllers.js"></script>
+  <title>HitchLess</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.min.js"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script src="public/js/services.js"></script>
+  <script src="public/js/controllers.js"></script>
+  <script src="public/js/travelpal.js"></script>
 </head>
 
 <body>
   <!-- Page: home  -->
-  <div id="home" data-role="page">
+  <div id="home" style="font-family: Comic Sans MS" data-role="page">
     <div data-role="header" data-position="fixed">
-      <h3>SEA - SFO #1</h3>
+      <h3>SEA - SFO</h3>
     </div>
-    <div role="main" class="ui-content">
-    <h1 is="gk-text">Flight Info&#xA0;</h1>
-    <h1 is="gk-text">Delay Times</h1>
-    <a href="#otherflight" class="ui-btn">I missed my flight</a>
+     <div role="main" class="ui-content">
+      <div id="at_home" style="display:block;">
+        <h3 id="flight_status_1">Please leave for the airport in 5 minutes, traffic is heavy.</h3>
+        <h3 id="flight_status_1_b" style="color: red">It will take you 55 minutes to reach the airport</h3>
+      </div>
+  
+      <div id="checkin_counter" style="display:block;">
+      <h3 id="flight_status_2" style="color: red">Please proceed to front of check-in line. Check-in closes in 2 minutes</h3>
+      </div>
+
+      <div id="inside_airport" style="display:block;">
+      <h3 id="flight_status_3">Looks like you made it through security!</h3>
+      <h3 style="color: red">Your gate is 8 minutes away, boarding doors shut in 10 minutes</h3>
+      </div>
+
+      <h3>Flight Info&#xA0;</h3>
+      <div id="flightInfo" style="border: 1px solid gray">
+        <b>Confirmation Code:</b> WEFDUB
+        <br>
+        <b>Alaska Airlines Flight #:</b> 318
+        <br>
+        <b>Travel Date:</b> Wednesday, April 22nd
+        <br>
+        <b>Scheduled Departure:</b> Original 9:55am, Now 10:15am
+        <br>
+        <b>Flight Duration:</b> 2 hr 5 min
+        <br>
+      </div>
+      <h3 is="gk-text">Delay Times</h3>
+      <div id="delayInfo" style="border: 1px solid gray">
+        Your Alaska Airlines flight is delayed 20 minutes.
+      </div>
+
+    <a href="#otherflight" style="background-color: cyan; font-family: Comic Sans MS; text-decoration: none" class="ui-btn">I missed my flight</a>
+
     </div>
     <div data-position="fixed" data-role="footer" data-tap-toggle="false">
       <div data-role="navbar" style="padding:0; margin:0 0 -1px;">
