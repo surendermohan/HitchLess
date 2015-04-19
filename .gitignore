@@ -12,3 +12,5 @@ pids
 logs
 results
 npm-debug.log
+/cordova/platforms/
+/cordova/plugins/
