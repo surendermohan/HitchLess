@@ -23,6 +23,20 @@ var userModel = require('./models/user')(mongoose, db);
 
 // USER
 
+server.get('/user/:email', function (req, res, next) {
+	console.log(req.params);
+	userModel.findOne({
+		_id: req.params.email
+	}, 'name', function (err, user) {
+		if (err) {
+			console.log('ERROR:' + err);
+			return next(err);
+		};
+
+		res.send(user);
+	});
+});
+
 server.post('/user', function (req, res, next) {
 
 	console.log('/user - ' + JSON.stringify(req.params));
@@ -30,7 +44,7 @@ server.post('/user', function (req, res, next) {
 	var user = new userModel({
 		name: req.params.name,
 		email: req.params.email,
-		email: req.params.phone
+		phone: req.params.phone
 	});
 
 	user.save(function (err) {
