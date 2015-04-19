@@ -55,7 +55,7 @@ server.get('/user/:email', function (req, res, next) {
 	console.log(req.params);
 	userModel.findOne({
 		email: req.params.email
-	}, 'name', function (err, user) {
+	}, function (err, user) {
 		if (err) {
 			console.log('ERROR:' + err);
 			return next(err);
