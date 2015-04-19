@@ -18,15 +18,13 @@ server.get('/echo/:name', function (req, res, next) {
 });
 
 
-var tripSchema = mongoose.Schema({
-	name: 'String'
-});
-var tripModel = db.model('Trip', tripSchema);
+var tripModel = require('./models/trip')(mongoose, db);
 
 server.post('/trip', function (req, res, next) {
 
 	var trip = new tripModel({
-		name: req.params.name
+		name: req.params.name,
+		flightId: req.params.flightId
 	});
 
 	trip.save(function (err) {
