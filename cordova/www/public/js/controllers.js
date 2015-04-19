@@ -1,4 +1,4 @@
-function TodoController($scope, Todo) {
+function TodoController($scope, Todo, $http) {
     $scope.todos = Todo.query();
 
     $scope.selectTodo = function (id) {
@@ -26,4 +26,12 @@ function TodoController($scope, Todo) {
             $scope.todos = _.without($scope.todos, $scope.todo);
         });
     }
+
+    $scope.getFlights = function () {
+         $http.get('/flights?origin=SEA&destination=SFO&returndate=2015-05-01')
+         .success(function(data) {
+            $scope.flights = data;
+        });
+    }    
 }
+

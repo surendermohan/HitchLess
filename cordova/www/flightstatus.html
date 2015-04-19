@@ -15,7 +15,7 @@
   <script src="public/js/controllers.js"></script>
 </head>
 
-<body>
+<body ng-controller="TodoController">
   <!-- Page: home  -->
   <div id="home" style="font-family: Comic Sans MS" data-role="page">
     <div data-role="header" data-position="fixed">
@@ -54,7 +54,9 @@
         Your Alaska Airlines flight is delayed 20 minutes.
       </div>
 
-    <a href="#otherflight" style="background-color: cyan; font-family: Comic Sans MS; text-decoration: none" class="ui-btn">I missed my flight</a>
+    <a href="#otherflight" 
+    ng-click="getFlights()" 
+    style="background-color: cyan; font-family: Comic Sans MS; text-decoration: none" class="ui-btn">I missed my flight</a>
 
     </div>
     <div data-position="fixed" data-role="footer" data-tap-toggle="false">
@@ -83,23 +85,23 @@
     <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow gk-decorate" id="gk-419AuD2" is="jqm-table">
       <thead>
         <tr>
+          <th data-priority="1">Flight #</th></th>
           <th data-priority="1">Date</th></th>
           <th data-priority="1">Departure</th>
           <th data-priority="1">Arrival</th>
+          <th data-priority="1">Destination</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th>04/19</th>
-          <td>5:15 PM</td>
-          <td>7:30 PM</td>
-        </tr>
-        <tr>
-          <th>4/19</th>
-          <td>4:30 PM</td>
-          <td>7:05 PM</td>
-        </tr>
+        <tbody id="flitghs-body">
+          <tr ng-repeat="flight in flights">
+            <td>{{flight.number}}</td>
+            <td>{{flight.departuredate}}</td>
+            <td>{{flight.departuretime}}</td>
+            <td>{{flight.arrivaltime}}</td>
+            <td>{{flight.destination}}</td>
+          </tr>
       </tbody>
+
     </table>
 
     </div>

@@ -184,6 +184,8 @@ app.get('/flights', function (req, res, next) {
 
         itineraries.forEach(function (it, idx) {
             console.log('idx:' + idx + '-' + 'it:' + it);
+            console.log('# - ' + it.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].FlightNumber);
+            
             var s = it.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0];
 
             var myFlight = {
