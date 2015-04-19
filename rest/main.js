@@ -121,12 +121,12 @@ server.get('/trip/:id', function (req, res, next) {
 	});
 });
 
-server.post('/trip', function (req, res, next) {
+server.post('/user/:id/trip', function (req, res, next) {
 
+	console.log('user id: ' + req.params.id);
 	var trip = new tripModel({
 		name: req.params.name,
-		flightId: req.params.flightId,
-		userId: req.params.userId
+		userId: req.params.id
 	});
 
 	trip.save(function (err) {
