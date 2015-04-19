@@ -23,6 +23,31 @@ var userModel = require('./models/user')(mongoose, db);
 
 // USER
 
+server.get('/user/:id/trips', function (req, res, next) {
+	tripModel.find({
+		userId: req.params.id
+	}, function (err, result) {
+		if (err) {
+			console.log(err);
+			return next(err);
+		};
+		res.send(result);
+	}); 
+  return next();
+});
+
+server.get('/users', function (req, res, next) {
+	userModel.find(function (err, result) {
+		if (err) {
+			console.log(err);
+			return next(err);
+		};
+
+		res.send(result);
+	}); 
+  return next();
+});
+
 server.get('/user/:email', function (req, res, next) {
 	console.log(req.params);
 	userModel.findOne({
