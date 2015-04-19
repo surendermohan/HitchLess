@@ -206,6 +206,48 @@ server.get('/flights', function (req, res, next) {
 
 });
 
+// FLIGHTS
+
+// Associate a flight with a trip
+
+var flightModel = require('./models/flight')(mongoose, db);
+
+server.post('/trip/:id/flight', function (req, res, next) {
+
+	console.log(req.params);
+
+	tripModel.findOne({
+		_id: req.params.id
+	}, function (err, result) {
+		if (err) {
+			console.log('ERROR:' + err);
+			return next(err);
+		};
+
+		console.log('Found:' + result);
+
+		var flight = new flightModel({
+			number: req.params.number,
+			departuredate: req.params.departuredate,
+			tripId: result._id
+		});
+
+		console.log('Saving flight-trip...');
+		flight.save(function (err) {
+			if (err) {
+				console.log(err);
+				return;
+			};
+			console.log('New Flight-Trip:' 
+				+ flight.number 
+				+ '-' + result._id
+				+ ' created.');
+		});
+		
+		res.send(flight);
+	});
+});
+
 server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
