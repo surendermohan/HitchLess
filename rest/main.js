@@ -157,14 +157,23 @@ server.get('/trips', function (req, res, next) {
 // using Sabre API
 server.get('/flights', function (req, res, next) {
 
+	console.log('params:' + JSON.stringify(req.params));
+
 	var request = require('request');
+	var dateFormat = require('dateformat');
+	var now = new Date();	
+
+	var timeWindow = dateFormat(now, 'UTC:hhmm') + '2359';
+	console.log('date: ' + now);
+	console.log('outbounddeparturewindow: ' + timeWindow);
 
 	// ?origin=JFK&destination=LAX&departuredate=2015-05-01&returndate=2015-05-05&onlineitinerariesonly=N&limit=10&offset=1&eticketsonly=N&sortby=totalfare&order=asc&sortby2=departuretime&order2=asc&pointofsalecountry=US
+	// Mandatory: origin, destination, return date (the same from the missed flight)
 	var propertiesObject = { 
-		'origin':'JFK',
-		'destination':'LAX',
-		'departuredate':'2015-05-01',
-		'returndate':'2015-05-05',
+		'origin': req.params.origin,
+		'destination': req.params.destination,
+		'departuredate': now.toISOString().substring(0, 10), // UTC but only the date
+		'returndate': req.params.returndate,
 		'onlineitinerariesonly':'N',
 		'limit':'10',
 		'offset':'1',
@@ -174,6 +183,7 @@ server.get('/flights', function (req, res, next) {
 		'sortby2':'departuretime',
 		'order2':'asc',
 		'pointofsalecountry':'US',
+		'outbounddeparturewindow' : timeWindow
 	};
 
 	request({
@@ -190,7 +200,7 @@ server.get('/flights', function (req, res, next) {
   	}
   	console.log("Get response: " + response.statusCode);
   	res.send({ok: 'Success!!',
-  		results: body
+  		results: JSON.parse(body)
   	});
 	});
 
