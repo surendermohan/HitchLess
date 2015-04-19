@@ -208,6 +208,21 @@ server.get('/flights', function (req, res, next) {
 
 // FLIGHTS
 
+// all flights for trip
+server.get('/trip/:id/flights', function (req, res, next) {
+	flightModel.find({
+		tripId: req.params.id
+	}, function (err, result) {
+		if (err) {
+			console.log(err);
+			return next(err);
+		};
+
+		res.send(result);
+	}); 
+  return next();
+});
+
 // Associate a flight with a trip
 
 var flightModel = require('./models/flight')(mongoose, db);
