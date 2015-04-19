@@ -169,15 +169,36 @@ app.get('/flights', function (req, res, next) {
         'Authorization': 'Bearer ' + sabreOAuthToken,
         'X-Originating-Ip': originIP
     },
-        qs: propertiesObject
-    }, function(err, response, body) {
-    if(err) { 
-        console.log(err); return; 
-    }
-    console.log("Get response: " + response.statusCode);
-    res.send({ok: 'Success!!',
-        results: JSON.parse(body)
-    });
+    qs: propertiesObject
+    }, function(err, response, body) {// body has the results, but you have to JSON.parse it
+        if(err) { 
+            console.log(err); return; 
+        }
+        console.log("Get response: " + response.statusCode);
+
+        var itineraries = JSON.parse(body).PricedItineraries;
+        console.log(itineraries);
+
+        var flights = [];
+
+        itineraries.forEach(function (it, idx) {
+            console.log('idx:' + idx + '-' + 'it:' + it);
+            var s = it.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0];
+
+            var myFlight = {
+                number: s.FlightNumber,
+                origin: s.DepartureAirport.LocationCode,
+                destination: s.ArrivalAirport.LocationCode,
+                departuretime: s.DepartureDateTime.substring(11),
+                departuredate: s.ArrivalDateTime.substring(0,10),
+                arrivaldate: s.ArrivalDateTime.substring(0,10),
+                arrivaltime: s.ArrivalDateTime.substring(11)
+            } 
+
+            flights.push(myFlight);
+        });
+
+        res.send(flights);
     });
 
 });
