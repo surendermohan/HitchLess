@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="TodoService">
 <head>
-  <title>HitchLess</title>
+  <title>TravelPal</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,11 +28,11 @@
         <h3 id="flight_status_1_b" style="color: red">It will take you 55 minutes to reach the airport</h3>
       </div>
   
-      <div id="checkin_counter" style="display:block;">
+      <div id="checkin_counter" style="display:none;">
       <h3 id="flight_status_2" style="color: red">Please proceed to front of check-in line. Check-in closes in 2 minutes</h3>
       </div>
 
-      <div id="inside_airport" style="display:block;">
+      <div id="inside_airport" style="display:none;">
       <h3 id="flight_status_3">Looks like you made it through security!</h3>
       <h3 style="color: red">Your gate is 8 minutes away, boarding doors shut in 10 minutes</h3>
       </div>
@@ -58,6 +58,12 @@
     <a href="#otherflight" 
     ng-click="getFlights()" 
     style="background-color: cyan; font-family: Comic Sans MS; text-decoration: none" class="ui-btn">I missed my flight</a>
+    <br><br>
+    <table width="100%"><tr>
+    <td><a href="" onclick="showRelevantFlightStatus(1)">Home</a></td>
+    <td><a href="" onclick="showRelevantFlightStatus(2)">Check-in</a></td>
+    <td><a href="" onclick="showRelevantFlightStatus(3)">Inside</a></td>
+    </tr></table>
 
     </div>
     <div data-position="fixed" data-role="footer" data-tap-toggle="false">

@@ -35,8 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         console.log('device is ready.')
-        initCordova();
-    },
+     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);

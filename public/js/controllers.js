@@ -35,3 +35,19 @@ function TodoController($scope, Todo, $http) {
     }    
 }
 
+function showRelevantFlightStatus(loc_id)
+{
+    $('#at_home').hide();
+    $('#checkin_counter').hide();
+    $('#inside_airport').hide();
+    if (loc_id == 1) {
+        $('#at_home').show();
+    }
+    else if (loc_id == 2) {
+        $('#checkin_counter').show();       
+    }
+    else if (loc_id == 3) {
+        $('#inside_airport').show();        
+    }
+}
+

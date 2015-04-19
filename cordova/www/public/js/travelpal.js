@@ -15,7 +15,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 {
- <script type="text/javascript">alert('device ready...');</script>
+  alert('device ready...');
   cordova.plugins.backgroundMode.enable();
   intialLoad();
   // Refer to https://github.com/christocracy/cordova-plugin-background-geolocation
