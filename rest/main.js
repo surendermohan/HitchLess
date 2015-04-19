@@ -21,6 +21,31 @@ server.get('/echo/:name', function (req, res, next) {
 var tripModel = require('./models/trip')(mongoose, db);
 var userModel = require('./models/user')(mongoose, db);
 
+// USER
+
+server.post('/user', function (req, res, next) {
+
+	console.log('/user - ' + JSON.stringify(req.params));
+
+	var user = new userModel({
+		name: req.params.name,
+		email: req.params.email,
+		email: req.params.phone
+	});
+
+	user.save(function (err) {
+		if (err) {
+			console.log(err);
+			return;
+		};
+		console.log('New User:' + user.name + ' created.');
+	});
+
+  res.send(user);
+  return next();
+});
+
+// TRIP
 server.get('/trip/:id', function (req, res, next) {
 	console.log(req.params);
 	tripModel.findOne({
