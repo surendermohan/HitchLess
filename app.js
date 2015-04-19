@@ -125,6 +125,63 @@ app.delete('/api/todo/:id', function (req, res){
     });
 });
 
+
+var sabreOAuthToken = 'Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/ACPCRTD!ICESMSLB\/CRT.LB!-0123456789012345678!123456!0!ABCDEFGHIJKLM!E2E-1';
+var originIP = '199.231.242.26';
+
+// Options for missed flight given a date
+// using Sabre API
+app.get('/flights', function (req, res, next) {
+
+    console.log('params:' + JSON.stringify(req.query));
+
+    var request = require('request');
+    var dateFormat = require('dateformat');
+    var now = new Date();   
+
+    var timeWindow = dateFormat(now, 'UTC:hhmm') + '2359';
+    console.log('date: ' + now);
+    console.log('outbounddeparturewindow: ' + timeWindow);
+
+    // ?origin=JFK&destination=LAX&departuredate=2015-05-01&returndate=2015-05-05&onlineitinerariesonly=N&limit=10&offset=1&eticketsonly=N&sortby=totalfare&order=asc&sortby2=departuretime&order2=asc&pointofsalecountry=US
+    // Mandatory: origin, destination, return date (the same from the missed flight)
+    var propertiesObject = { 
+        'origin': req.query.origin,
+        'destination': req.query.destination,
+        'departuredate': now.toISOString().substring(0, 10), // UTC but only the date
+        'returndate': req.query.returndate,
+        'onlineitinerariesonly':'N',
+        'limit':'10',
+        'offset':'1',
+        'eticketsonly':'N',
+        'sortby':'totalfare',
+        'order':'asc',
+        'sortby2':'departuretime',
+        'order2':'asc',
+        'pointofsalecountry':'US',
+        'outbounddeparturewindow' : timeWindow
+    };
+
+    request({
+        method: 'GET',
+        url:'https://api.test.sabre.com/v1/shop/flights', 
+        headers: {
+        'Authorization': 'Bearer ' + sabreOAuthToken,
+        'X-Originating-Ip': originIP
+    },
+        qs: propertiesObject
+    }, function(err, response, body) {
+    if(err) { 
+        console.log(err); return; 
+    }
+    console.log("Get response: " + response.statusCode);
+    res.send({ok: 'Success!!',
+        results: JSON.parse(body)
+    });
+    });
+
+});
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });

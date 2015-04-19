@@ -6,8 +6,10 @@
     "start": "node app"
   },
   "dependencies": {
+    "dateformat": "^1.0.11",
     "express": "3.0.3",
     "mongodb": ">= 0.9.6-7",
-    "mongoose": ">= 3.4.0"
+    "mongoose": ">= 3.4.0",
+    "request": "^2.55.0"
   }
 }
