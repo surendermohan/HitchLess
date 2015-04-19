@@ -97,7 +97,8 @@ server.post('/trip', function (req, res, next) {
 
 	var trip = new tripModel({
 		name: req.params.name,
-		flightId: req.params.flightId
+		flightId: req.params.flightId,
+		userId: req.params.userId
 	});
 
 	trip.save(function (err) {
