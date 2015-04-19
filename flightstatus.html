@@ -86,16 +86,20 @@
     <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow gk-decorate" id="gk-419AuD2" is="jqm-table">
       <thead>
         <tr>
+          <th data-priority="1">Flight #</th></th>
           <th data-priority="1">Date</th></th>
           <th data-priority="1">Departure</th>
           <th data-priority="1">Arrival</th>
+          <th data-priority="1">Destination</th>
         </tr>
       </thead>
         <tbody id="flitghs-body">
           <tr ng-repeat="flight in flights">
+            <td>{{flight.number}}</td>
             <td>{{flight.departuredate}}</td>
             <td>{{flight.departuretime}}</td>
             <td>{{flight.arrivaltime}}</td>
+            <td>{{flight.destination}}</td>
           </tr>
       </tbody>
 
