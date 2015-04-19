@@ -21,6 +21,20 @@ server.get('/echo/:name', function (req, res, next) {
 var tripModel = require('./models/trip')(mongoose, db);
 var userModel = require('./models/user')(mongoose, db);
 
+server.get('/trip/:id', function (req, res, next) {
+	console.log(req.params);
+	tripModel.findOne({
+		_id: req.params.id
+	}, 'name flightId', function (err, trip) {
+		if (err) {
+			console.log('ERROR:' + err);
+			return next(err);
+		};
+
+		res.send(trip);
+	});
+});
+
 server.post('/trip', function (req, res, next) {
 
 	var trip = new tripModel({
